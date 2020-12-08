@@ -38,4 +38,12 @@ function createMap(earthquakes, tectonics) {
         id: "outdoors-v9",
         accessToken: API_KEY
     });
+
+    // BaseMaps object for base layers
+    var baseMaps = {
+        "Street Map": streetmap,
+        "Dark Map": darkmap,
+        "Satellite Map": satmap,
+        "Outdoors Map": outdoors
+    };
 }
