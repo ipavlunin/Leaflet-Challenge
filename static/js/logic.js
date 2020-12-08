@@ -46,4 +46,8 @@ function createMap(earthquakes, tectonics) {
         "Satellite Map": satmap,
         "Outdoors Map": outdoors
     };
+    var overlayMaps = {
+        Earthquakes: earthquakes,
+        Tectonics: tectonics
+    };
 }
