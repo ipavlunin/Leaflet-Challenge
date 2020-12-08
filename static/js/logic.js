@@ -50,4 +50,13 @@ function createMap(earthquakes, tectonics) {
         Earthquakes: earthquakes,
         Tectonics: tectonics
     };
+
+    // New map
+    var myMap = L.map("map", {
+        center: [
+            30, 0
+        ],
+        zoom: 3,
+        layers: [satmap, earthquakes, tectonics]
+    });
 }
