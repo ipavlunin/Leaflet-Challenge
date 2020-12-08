@@ -44,7 +44,7 @@ function createFeatures(earthquakeDataFeatures, tectonicDataFeatures) {
     var tectonics = L.geoJSON(tectonicDataFeatures, {
         style: function (feature) {
             return {
-                color: "orange",
+                color: "purple",
                 weight: 2
             };
         },
