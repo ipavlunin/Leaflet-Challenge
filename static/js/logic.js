@@ -41,6 +41,8 @@ function createFeatures(earthquakeDataFeatures, tectonicDataFeatures) {
             return L.circle(latlng, { radius: radius, color: color, fillOpacity: 0.75, fillcolor: color })
         }, onEachFeature: eqLabels
     });
+
+
     var tectonics = L.geoJSON(tectonicDataFeatures, {
         style: function (feature) {
             return {
@@ -84,8 +86,8 @@ function createMap(earthquakes, tectonics) {
 
     // BaseMaps object for base layers
     var baseMaps = {
-        "Street Map": streetmap,
         "Dark Map": darkmap,
+        "Street Map": streetmap,
         "Satellite Map": satmap,
         "Outdoors Map": outdoors
     };
@@ -100,11 +102,35 @@ function createMap(earthquakes, tectonics) {
             30, 0
         ],
         zoom: 3,
-        layers: [satmap, earthquakes, tectonics]
+        layers: [darkmap, earthquakes, tectonics]
     });
 
-    // Layer control
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
+
+    // Map scheme for legend
+    // function getColor(d) {
+    //     return d > 5 ? '#CC0000' :
+    //         d > 4 ? '#CC6600' :
+    //             d > 3 ? '#FF8000' :
+    //                 d > 2 ? '#FFFF33' :
+    //                     d > 1 ? '#FFFF66' :
+    //                         d > 0 ? '#B2FF66' :
+    //                             '#FFEDA0';
+    // }
+
+    var legend = L.control({ position: 'bottomright' })
+    legend.onAdd = function (myMap) {
+        var div = L.DomUtil.create('div', 'info legend')
+
+        var grades = [0, 1, 2, 3, 4, 5];
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + grades[i] + 1 + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+        return div;
+    }
+    legend.addTo(myMap);
 }
